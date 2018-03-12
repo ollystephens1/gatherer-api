@@ -1,0 +1,14 @@
+{
+  "server": {
+    "port": 3000,
+    "host": "localhost",
+    "bodyParserLimit": "50mb"
+  },
+  "db": {
+    "host": "localhost",
+    "port": 27017,
+    "dbName": "my-db-name",
+    "user": "my-db-user",
+    "pass": "my-db-pass"
+  }
+}

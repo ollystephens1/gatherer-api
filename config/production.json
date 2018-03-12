@@ -1,0 +1,9 @@
+{
+  "server": {
+    "host": "my-prod-host",
+    "port": 3001
+  },
+  "db": {
+    "host": "my-prod-host"
+  }
+}
