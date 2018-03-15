@@ -19,3 +19,5 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', routes);
 app.listen(PORT, () => console.log(`Node API running on port ${PORT}`));
+
+export default app;
