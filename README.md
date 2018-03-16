@@ -61,3 +61,20 @@ Then simply navigate to your specified production port locally (see Config secti
 `pm2 list` - Show all processes
 
 [Read more about PM2](http://pm2.keymetrics.io/docs/usage/quick-start/)
+
+### Logging
+
+Use the custom logger for multi-level logging.
+
+`import 'log' from '@core/logger'`
+
+Log levels in order of importance:
+
+`log.error('This is an error');`
+`log.warn('This is an warning');`
+`log.info('This is some important information');`
+`log.verbose('This is a message');`
+`log.debug('This is some debug');`
+`log.silly('This is some random');`
+
+Errors and warnings are logged to a log file by date/time.
