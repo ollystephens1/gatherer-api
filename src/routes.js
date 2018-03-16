@@ -1,5 +1,5 @@
 import express from 'express';
-import response from './core/response/response';
+import response from '@core/response/response';
 
 const router = express.Router();
 

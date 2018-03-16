@@ -74,7 +74,7 @@ module.exports = {
       "jsx-quotes": "error",
       "key-spacing": "error",
       "keyword-spacing": "error",
-      "line-comment-position": "error",
+      "line-comment-position": "off",
       "linebreak-style": [
           "error",
           "unix"
@@ -118,12 +118,12 @@ module.exports = {
       "no-extend-native": "error",
       "no-extra-bind": "error",
       "no-extra-label": "error",
-      "no-extra-parens": "error",
+      "no-extra-parens": "off",
       "no-floating-decimal": "error",
       "no-implicit-coercion": "error",
       "no-implicit-globals": "error",
       "no-implied-eval": "error",
-      "no-inline-comments": "error",
+      "no-inline-comments": "off",
       "no-invalid-this": "error",
       "no-iterator": "error",
       "no-label-var": "error",
@@ -168,7 +168,7 @@ module.exports = {
       "no-shadow": "error",
       "no-shadow-restricted-names": "error",
       "no-spaced-func": "error",
-      "no-sync": "error",
+      "no-sync": "off",
       "no-tabs": "error",
       "no-template-curly-in-string": "error",
       "no-ternary": "off",
@@ -233,7 +233,7 @@ module.exports = {
       "sort-keys": "off",
       "sort-vars": "off",
       "space-before-blocks": "error",
-      "space-before-function-paren": "error",
+      "space-before-function-paren": "off",
       "space-in-parens": [
           "error",
           "never"
@@ -250,7 +250,7 @@ module.exports = {
           "error",
           "never"
       ],
-      "valid-jsdoc": "error",
+      "valid-jsdoc": "off",
       "vars-on-top": "error",
       "wrap-iife": "error",
       "wrap-regex": "error",
