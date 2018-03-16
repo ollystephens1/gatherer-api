@@ -33,3 +33,31 @@ To access environment config variables, do as follows:
 `config.get('server.port');`
 
 [Read more](https://www.npmjs.com/package/config)
+
+### Testing
+
+Run Mocha / Chai tests
+
+`npm run test`
+
+### Deployment with PM2
+
+Once the app is bundled for production, deploy and test with PM2.
+
+To set a new process with PM2 (pointing to production bundle)
+
+`NODE_ENV=production ./node_modules/.bin/pm2 start dist/server.bundle.js --name=seed-api`
+
+Replace `name` with whatever you wish to call the process.
+
+`pm2 start seed-api` - Start daemonized API
+
+Then simply navigate to your specified production port locally (see Config section)
+
+`pm2 stop seed-api` - Stop daemonized API
+
+`pm2 reload seed-api` - Reload (stop & start) daemonized API
+
+`pm2 list` - Show all processes
+
+[Read more about PM2](http://pm2.keymetrics.io/docs/usage/quick-start/)
