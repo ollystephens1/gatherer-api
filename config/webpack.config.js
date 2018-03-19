@@ -52,6 +52,15 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['.js'],
+    modules: [
+      path.resolve( __dirname, 'node_modules' )
+    ],
+    alias: {
+      '@core': `${ROOT}/src/core`
+    }
+  },
   stats: {
     colors: true
   },

@@ -17,15 +17,20 @@
   "dependencies": {
     "adaro": "~1.0.4",
     "body-parser": "~1.18.2",
+    "compression": "^1.7.2",
     "config": "^1.30.0",
+    "connect-timeout": "^1.9.0",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "fs-extra": "^5.0.0",
     "helmet": "^3.12.0",
+    "moment": "^2.21.0",
     "morgan": "~1.9.0",
     "node-sass-middleware": "0.9.8",
     "pm2": "^2.10.1",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "winston": "^2.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
