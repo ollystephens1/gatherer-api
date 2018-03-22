@@ -3,10 +3,10 @@ import config from 'config';
 import helmet from 'helmet';
 import compression from 'compression';
 import morgan from 'morgan';
-import log from '@core/logger';
 import timeout from 'connect-timeout';
-import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import log from '@core/logger';
 import routes from './routes';
 
 const PORT = config.get('server.port');
@@ -19,7 +19,7 @@ app.use(compression());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: config.get('server.bodyParserLimit') }));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(timeout(config.get('server.timeout')));
 
 app.use('/', routes);

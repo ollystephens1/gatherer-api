@@ -106,7 +106,7 @@ module.exports = {
       "no-buffer-constructor": "error",
       "no-caller": "error",
       "no-catch-shadow": "error",
-      "no-confusing-arrow": "error",
+      "no-confusing-arrow": "off",
       "no-console": "off",
       "no-continue": "error",
       "no-div-regex": "error",
@@ -148,7 +148,7 @@ module.exports = {
       "no-new-require": "error",
       "no-new-wrappers": "error",
       "no-octal-escape": "error",
-      "no-param-reassign": "error",
+      "no-param-reassign": "off",
       "no-path-concat": "error",
       "no-plusplus": "error",
       "no-process-env": "error",
@@ -197,7 +197,7 @@ module.exports = {
       "object-curly-spacing": [
           "error", "always"
       ],
-      "object-property-newline": "error",
+      "object-property-newline": "off",
       "object-shorthand": "error",
       "one-var": "off",
       "one-var-declaration-per-line": "error",
