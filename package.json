@@ -4,14 +4,14 @@
   "description": "ClearPeaks Node.js API seed",
   "private": true,
   "scripts": {
-    "build:dev": "NODE_ENV=development webpack --config ./config/webpack.config.js --watch",
-    "build:prod": "npm run clean && NODE_ENV=production webpack --config ./config/webpack.config.js",
+    "build:dev": "cross-env NODE_ENV=development webpack --config ./config/webpack.config.js --watch",
+    "build:prod": "npm run clean && cross-env NODE_ENV=production webpack --config ./config/webpack.config.js",
     "clean": "rimraf dist/*",
     "eslint": "./node_modules/.bin/eslint ./src",
     "precommit": "npm run eslint",
     "start": "npm-run-all --parallel watch:server build:dev",
-    "start:prod": "NODE_ENV=production node dist/server.bundle.js",
-    "test": "npm run build:prod && NODE_ENV=production  mocha --timeout 10000",
+    "start:prod": "cross-env NODE_ENV=production node dist/server.bundle.js",
+    "test": "npm run build:prod && cross-env NODE_ENV=production  mocha --timeout 10000",
     "watch:server": "nodemon ./dist/server.bundle.js --watch ./dist"
   },
   "dependencies": {
@@ -38,6 +38,7 @@
     "babel-preset-es2015": "^6.24.1",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "cross-env": "^5.1.4",
     "dotenv": "^5.0.0",
     "eslint": "^4.18.2",
     "husky": "^0.14.3",
