@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import morgan from 'morgan';
 import timeout from 'connect-timeout';
+import responseTime from 'response-time';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import log from '@core/logger';
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: config.get('server.bodyParserLimit') }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(timeout(config.get('server.timeout')));
+app.use(responseTime());
 
 app.use('/', routes);
 app.listen(PORT, () => log.info(`${CLIENT.name} running on port ${PORT}`));
