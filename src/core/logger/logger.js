@@ -36,7 +36,7 @@ const day = () => moment().format('YYYY-MM-DD');
  *
  * @type {Class}
  */
-export default function(level = 'warn') {
+export default function (level = 'warn') {
   fs.ensureDirSync('log');
 
   return new (winston.Logger)({
@@ -44,13 +44,13 @@ export default function(level = 'warn') {
       new (winston.transports.Console)({
         timestamp: time,
         colorize: true,
-        level: 'silly' // Everything to console
+        level: 'silly', // Everything to console
       }),
       new (winston.transports.File)({
         filename: `log/${day()}.log`,
         timestamp: time,
-        level
-      })
-    ]
+        level,
+      }),
+    ],
   });
 }
