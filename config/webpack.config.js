@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var ENV = process.env.NODE_ENV;
 var ROOT = process.cwd();

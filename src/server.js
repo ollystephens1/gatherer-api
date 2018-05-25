@@ -8,6 +8,7 @@ import responseTime from 'response-time';
 import bodyParser from 'body-parser';
 import log from '@core/logger'; // eslint-disable-line
 import database from '@core/database'; // eslint-disable-line
+import cacheMiddleware from '@core/cache'; // eslint-disable-line
 import posts from './routes/posts';
 
 const PORT = config.get('server.port');
@@ -22,6 +23,7 @@ app.use(bodyParser.json({ limit: config.get('server.bodyParserLimit') }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(timeout(config.get('server.timeout')));
 app.use(responseTime());
+app.use(cacheMiddleware());
 app.use(database());
 
 app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));

@@ -14,5 +14,9 @@
     "dbName": "my-db-name",
     "user": "my-db-user",
     "pass": "my-db-pass"
+  },
+  "cache": {
+    "stdTTL": 900000,
+    "checkperiod": 0
   }
 }
