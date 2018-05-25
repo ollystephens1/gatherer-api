@@ -1,13 +1,13 @@
-var path = require('path');
-var webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-var ENV = process.env.NODE_ENV;
-var ROOT = process.cwd();
-var ENTRY = ROOT + '/src/server.js';
+const ENV = process.env.NODE_ENV;
+const ROOT = process.cwd();
+const ENTRY = ROOT + '/src/server.js';
 
-var plugins = [
+const plugins = [
   new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')])
 ];
 
