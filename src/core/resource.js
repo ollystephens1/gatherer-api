@@ -34,8 +34,8 @@ export default (model) => {
     ? req.editValidation(req, res, next)
     : next());
 
-  router.get('/', ({ dataSource }, res, next) => {
-    dataSource.find()
+  router.get('/', ({ dataSource, query }, res, next) => {
+    dataSource.find(query)
       .then(docs => res.json(docs))
       .catch(next);
   });
