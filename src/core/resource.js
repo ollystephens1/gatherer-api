@@ -2,9 +2,27 @@ import express from 'express';
 
 const router = express.Router();
 
+/**
+ * Creates a new resource with a dataSource.
+ * Model will resolve Promises and functions too. Function will received the req, res and next function from
+ * express middleware.
+ *
+ * @param {object|function|Promise} model The model that follows the model interface for crud operations
+ * @returns Router
+ */
 export default (model) => {
   router.use((req, res, next) => {
-    req.dataSource = model;
+    if (model.then !== undefined && model.catch !== undefined) {
+      model
+        .then((dataSource) => {
+          req.dataSource = dataSource;
+          next();
+        })
+        .catch(err => next(err));
+      return;
+    }
+
+    req.dataSource = typeof model === 'function' ? model(req, res, next) : model;
     next();
   });
 
