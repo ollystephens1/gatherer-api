@@ -4,15 +4,14 @@
   "description": "ClearPeaks Node.js API seed",
   "private": true,
   "scripts": {
-    "build:dev": "cross-env NODE_ENV=development webpack --config ./config/webpack.config.js --watch",
-    "build:prod": "npm run clean && cross-env NODE_ENV=production webpack --config ./config/webpack.config.js",
-    "clean": "rimraf dist/*",
+    "build:dev": "cross-env NODE_ENV=development npm run build:webpack",
+    "build:prod": "cross-env NODE_ENV=production npm run build:webpack",
+    "build:webpack": "webpack --config ./config/webpack.config.js",
     "eslint": "./node_modules/.bin/eslint ./src",
     "precommit": "npm run eslint",
-    "start": "npm-run-all --parallel watch:server build:dev",
+    "start": "npm run build:dev",
     "start:prod": "cross-env NODE_ENV=production node dist/server.bundle.js",
-    "test": "npm run build:prod && cross-env NODE_ENV=production  mocha --timeout 10000",
-    "watch:server": "nodemon ./dist/server.bundle.js --watch ./dist"
+    "test": "npm run build:prod && cross-env NODE_ENV=production mocha --timeout 10000"
   },
   "dependencies": {
     "adaro": "~1.0.4",
@@ -48,6 +47,7 @@
     "husky": "^0.14.3",
     "mocha": "^5.0.4",
     "nodemon": "^1.14.12",
+    "nodemon-webpack-plugin": "^3.0.1",
     "npm-run-all": "^4.1.2",
     "rimraf": "^2.6.2",
     "webpack": "^3.11.0",

@@ -1,14 +1,17 @@
-var path = require('path');
-var webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 
-var ENV = process.env.NODE_ENV;
-var ROOT = process.cwd();
-var ENTRY = ROOT + '/src/server.js';
+const ENV = process.env.NODE_ENV;
+const ROOT = process.cwd();
+const ENTRY = `${ROOT}/src/server.js`;
+const isProd = (ENV === 'production');
 
 var plugins = [
-  new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')])
+  new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')]),
+  new NodemonPlugin()
 ];
 
 if (ENV === 'production') {
@@ -31,6 +34,8 @@ if (ENV === 'production') {
 
 module.exports = {
   entry: ENTRY,
+  devtool: isProd ? false : 'sourcemap',
+  watch: !isProd,
   output: {
     path: path.resolve(ROOT, 'dist'),
     filename: 'server.bundle.js'
