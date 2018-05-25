@@ -1,32 +1,30 @@
-var path = require('path');
-var webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-var ENV = process.env.NODE_ENV;
-var ROOT = process.cwd();
-var ENTRY = ROOT + '/src/server.js';
+const ENV = process.env.NODE_ENV;
+const ROOT = process.cwd();
+const ENTRY = `${ROOT}/src/server.js`;
 
-var plugins = [
+const plugins = [
   new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')])
 ];
 
 if (ENV === 'production') {
-  plugins.push(
-    new UglifyJsPlugin({
-      sourceMap: false,
-      uglifyOptions: {
-        ecma: 5,
-        warnings: false,
-        ie8: false,
-        mangle: true,
-        output: {
-          ascii_only: true,
-          comments: false
-        }
+  plugins.push(new UglifyJsPlugin({
+    sourceMap: false,
+    uglifyOptions: {
+      ecma: 5,
+      warnings: false,
+      ie8: false,
+      mangle: true,
+      output: {
+        ascii_only: true,
+        comments: false
       }
-    })
-  );
+    }
+  }));
 }
 
 module.exports = {
@@ -55,7 +53,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     modules: [
-      path.resolve( __dirname, 'node_modules' )
+      path.resolve(__dirname, 'node_modules')
     ],
     alias: {
       '@core': `${ROOT}/src/core`
@@ -65,5 +63,5 @@ module.exports = {
     colors: true
   },
   devtool: 'source-map',
-  plugins: plugins
+  plugins
 };
