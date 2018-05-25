@@ -5,28 +5,26 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 const ROOT = process.cwd();
-const ENTRY = ROOT + '/src/server.js';
+const ENTRY = `${ROOT}/src/server.js`;
 
 const plugins = [
   new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')])
 ];
 
 if (ENV === 'production') {
-  plugins.push(
-    new UglifyJsPlugin({
-      sourceMap: false,
-      uglifyOptions: {
-        ecma: 5,
-        warnings: false,
-        ie8: false,
-        mangle: true,
-        output: {
-          ascii_only: true,
-          comments: false
-        }
+  plugins.push(new UglifyJsPlugin({
+    sourceMap: false,
+    uglifyOptions: {
+      ecma: 5,
+      warnings: false,
+      ie8: false,
+      mangle: true,
+      output: {
+        ascii_only: true,
+        comments: false
       }
-    })
-  );
+    }
+  }));
 }
 
 module.exports = {
@@ -55,7 +53,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     modules: [
-      path.resolve( __dirname, 'node_modules' )
+      path.resolve(__dirname, 'node_modules')
     ],
     alias: {
       '@core': `${ROOT}/src/core`
@@ -65,5 +63,5 @@ module.exports = {
     colors: true
   },
   devtool: 'source-map',
-  plugins: plugins
+  plugins
 };
