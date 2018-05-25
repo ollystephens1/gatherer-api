@@ -22,5 +22,5 @@ export default {
   updateOne(id, body) {
     const method = 'PUT';
     return fetch(`${baseUrl}/${id}`, { method, body });
-  },
+  }
 };

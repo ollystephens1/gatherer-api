@@ -44,13 +44,13 @@ export default function (level = 'warn') {
       new (winston.transports.Console)({
         timestamp: time,
         colorize: true,
-        level: 'silly', // Everything to console
+        level: 'silly' // Everything to console
       }),
       new (winston.transports.File)({
         filename: `log/${day()}.log`,
         timestamp: time,
-        level,
+        level
       }),
-    ],
+    ]
   });
 }
