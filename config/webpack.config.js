@@ -34,7 +34,7 @@ if (ENV === 'production') {
 
 module.exports = {
   entry: ENTRY,
-  devtool: isProd ? false : 'sourcemap',
+  devtool: isProd ? false : 'eval',
   watch: !isProd,
   output: {
     path: path.resolve(ROOT, 'dist'),
@@ -50,9 +50,11 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015']
+          presets: ['es2015'],
+          retainLines: true
         }
       }
     ]
@@ -69,6 +71,5 @@ module.exports = {
   stats: {
     colors: true
   },
-  devtool: 'source-map',
   plugins: plugins
 };
