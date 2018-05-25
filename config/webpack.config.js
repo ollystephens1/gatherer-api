@@ -15,21 +15,19 @@ const plugins = [
 ];
 
 if (ENV === 'production') {
-  plugins.push(
-    new UglifyJsPlugin({
-      sourceMap: false,
-      uglifyOptions: {
-        ecma: 5,
-        warnings: false,
-        ie8: false,
-        mangle: true,
-        output: {
-          ascii_only: true,
-          comments: false
-        }
+  plugins.push(new UglifyJsPlugin({
+    sourceMap: false,
+    uglifyOptions: {
+      ecma: 5,
+      warnings: false,
+      ie8: false,
+      mangle: true,
+      output: {
+        ascii_only: true,
+        comments: false
       }
-    })
-  );
+    }
+  }));
 }
 
 module.exports = {
@@ -62,7 +60,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     modules: [
-      path.resolve( __dirname, 'node_modules' )
+      path.resolve(__dirname, 'node_modules')
     ],
     alias: {
       '@core': `${ROOT}/src/core`
@@ -71,5 +69,5 @@ module.exports = {
   stats: {
     colors: true
   },
-  plugins: plugins
+  plugins
 };

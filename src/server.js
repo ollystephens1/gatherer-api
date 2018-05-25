@@ -6,9 +6,9 @@ import morgan from 'morgan';
 import connectTimeout from 'connect-timeout';
 import responseTime from 'response-time';
 import bodyParser from 'body-parser';
-import log from '@core/logger'; // eslint-disable-line
-import database from '@core/database'; // eslint-disable-line
-import posts from './routes/posts';
+import log from '@core/logger';
+import database from '@core/database';
+import posts from './resources/posts';
 
 const client = config.get('client');
 const { port, timeout, bodyParserLimit } = config.get('server');
