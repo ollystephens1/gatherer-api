@@ -24,7 +24,7 @@ app.use(timeout(config.get('server.timeout')));
 app.use(responseTime());
 app.use(database());
 
-app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }).end());
+app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));
 app.use('/posts', posts);
 
 // 404 hanlder
