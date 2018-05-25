@@ -8,7 +8,7 @@ import responseTime from 'response-time';
 import bodyParser from 'body-parser';
 import log from '@core/logger'; // eslint-disable-line
 import database from '@core/database'; // eslint-disable-line
-import posts from './routes/posts';
+import posts from './resources/posts';
 
 const PORT = config.get('server.port');
 const CLIENT = config.get('client');
