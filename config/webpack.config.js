@@ -9,7 +9,7 @@ const ROOT = process.cwd();
 const ENTRY = `${ROOT}/src/server.js`;
 const isProd = (ENV === 'production');
 
-var plugins = [
+const plugins = [
   new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')]),
   new NodemonPlugin()
 ];

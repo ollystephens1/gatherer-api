@@ -3,24 +3,23 @@ import config from 'config';
 import helmet from 'helmet';
 import compression from 'compression';
 import morgan from 'morgan';
-import timeout from 'connect-timeout';
+import connectTimeout from 'connect-timeout';
 import responseTime from 'response-time';
 import bodyParser from 'body-parser';
 import log from '@core/logger'; // eslint-disable-line
 import database from '@core/database'; // eslint-disable-line
 import posts from './routes/posts';
 
-const PORT = config.get('server.port');
-const CLIENT = config.get('client');
-
+const client = config.get('client');
+const { port, timeout, bodyParserLimit } = config.get('server');
 const app = express();
 
 app.use(helmet());
 app.use(compression());
 app.use(morgan('dev'));
-app.use(bodyParser.json({ limit: config.get('server.bodyParserLimit') }));
+app.use(bodyParser.json({ limit: bodyParserLimit }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(timeout(config.get('server.timeout')));
+app.use(connectTimeout(timeout));
 app.use(responseTime());
 app.use(database());
 
@@ -43,6 +42,6 @@ app.use((err, req, res) => {
   });
 });
 
-app.listen(PORT, () => log.info(`${CLIENT.name} running on port ${PORT}`));
+app.listen(port, () => log.info(`${client.name} running on port ${port}`));
 
 export default app;
