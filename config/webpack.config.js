@@ -2,13 +2,16 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 const ROOT = process.cwd();
 const ENTRY = `${ROOT}/src/server.js`;
+const isProd = (ENV === 'production');
 
 const plugins = [
-  new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')])
+  new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')]),
+  new NodemonPlugin()
 ];
 
 if (ENV === 'production') {
@@ -29,6 +32,8 @@ if (ENV === 'production') {
 
 module.exports = {
   entry: ENTRY,
+  devtool: isProd ? false : 'eval',
+  watch: !isProd,
   output: {
     path: path.resolve(ROOT, 'dist'),
     filename: 'server.bundle.js'
@@ -43,9 +48,11 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015']
+          presets: ['es2015'],
+          retainLines: true
         }
       }
     ]
@@ -62,6 +69,5 @@ module.exports = {
   stats: {
     colors: true
   },
-  devtool: 'source-map',
   plugins
 };

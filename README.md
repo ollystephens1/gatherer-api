@@ -1,12 +1,10 @@
-# Node.js API seed (ES6 w/ Babel, Webpack & Nodemon)
-
-Quick starter Node API Seed.
+# ClearPeaks API seed
 
 ### Quick start
 
 Install dependencies
 
-`npm install`
+`yarn`
 
 Launch API in development mode (with Webpack & Nodemon live reloading)
 
