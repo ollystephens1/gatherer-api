@@ -39,7 +39,7 @@ app.use((err, req, res) => {
   err.code = err.status || err.code || 500;
   res.status(err.code).json({
     code: err.code,
-    msg: err.message,
+    msg: err.message
   });
 });
 

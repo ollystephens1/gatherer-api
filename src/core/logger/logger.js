@@ -51,6 +51,6 @@ export default function (level = 'warn') {
         timestamp: time,
         level,
       }),
-    ],
+    ]
   });
 }
