@@ -1,6 +1,6 @@
 import CODES from './codes.json';
 
-const setStatusCode = (success, code) => success ? code || 200 : code || 500;
+const setStatusCode = (success, code) => (success ? code || 200 : code || 500);
 
 const setDefaultMessage = (success, code) => {
   const codes = success ? CODES.success : CODES.error;

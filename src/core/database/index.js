@@ -1,10 +1,8 @@
-const fakeConnection = () => {
-  return Promise.resolve({
-    close() {
-      return null;
-    }
-  });
-};
+const fakeConnection = () => Promise.resolve({
+  close() {
+    return null;
+  },
+});
 
 /*
  * Here we should add the connection to your database.
@@ -13,11 +11,11 @@ const fakeConnection = () => {
  * if finished.
  */
 export default () => (req, res, next) => {
-  fakeConnection().
-    then((connection) => {
+  fakeConnection()
+    .then((connection) => {
       res.on('finish', () => connection.close());
-      req.locals.db = connection;
+      req.db = connection;
       next();
-    }).
-    catch((err) => next(err));
+    })
+    .catch(err => next(err));
 };

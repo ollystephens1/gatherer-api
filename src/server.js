@@ -6,9 +6,9 @@ import morgan from 'morgan';
 import timeout from 'connect-timeout';
 import responseTime from 'response-time';
 import bodyParser from 'body-parser';
-import log from '@core/logger';
-import database from '@core/database';
-import routes from './routes';
+import log from '@core/logger'; // eslint-disable-line
+import database from '@core/database'; // eslint-disable-line
+import posts from './routes/posts';
 
 const PORT = config.get('server.port');
 const CLIENT = config.get('client');
@@ -24,7 +24,8 @@ app.use(timeout(config.get('server.timeout')));
 app.use(responseTime());
 app.use(database());
 
-app.use('/', routes);
+app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));
+app.use('/posts', posts);
 
 // 404 hanlder
 app.use((req, res, next) => {
