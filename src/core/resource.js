@@ -42,11 +42,13 @@ export default (model) => {
   });
 
   router.get('/', ({ dataSource, query }, res, next) => {
-    const { byPage, max } = config.get('pagination');
-    const paginationLimit = query.limit || byPage;
-    const limit = paginationLimit > max ? max : paginationLimit;
+    const { max, limit } = config.get('pagination');
+    const reqLimit = query.limit || limit;
     const page = query.page || 1;
-    const promises = [dataSource.find({ ...query, limit, page }), dataSource.count(query)];
+    const promises = [
+      dataSource.find({ ...query, page, limit: reqLimit > max ? max : reqLimit }),
+      dataSource.count(query)
+    ];
 
     Promise.all(promises)
       .then(([docs, count]) => {

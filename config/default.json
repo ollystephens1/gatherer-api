@@ -20,7 +20,7 @@
     "checkperiod": 0
   },
   "pagination": {
-    "byPage": 50,
+    "limit": 50,
     "max": 200
   }
 }
