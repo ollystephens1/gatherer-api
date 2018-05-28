@@ -1,19 +1,24 @@
-import { put, get } from './memory';
+export default cache => (req, res, next) => {
+  const key = `__express__${req.originalUrl}`;
 
-export default () => (req, res, next) => {
+  if (req.method === 'PURGE') {
+    cache.purge(key);
+    return res.end();
+  }
+
   if (req.method !== 'GET') {
+    cache.purge(key); // If its update/delete purge the key so we don't serve outdated data
     return next();
   }
 
-  const key = `__express__${req.originalUrl}`;
-  const cacheContent = get(key);
+  const cacheContent = cache.get(key);
   if (cacheContent) {
     return res.json(cacheContent);
   }
 
   res.sendResponse = res.json;
   res.json = (body) => {
-    put(key, body);
+    cache.put(key, body);
     res.sendResponse(body);
   };
   return next();

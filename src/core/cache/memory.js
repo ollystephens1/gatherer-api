@@ -6,8 +6,10 @@ const engine = new cache.Cache({
   checkperiod: config.get('cache.checkperiod'),
 });
 
-export const put = (key, body) => engine.put(key, JSON.stringify(body));
+const put = (key, body) => engine.put(key, JSON.stringify(body));
 
-export const purge = key => engine.del(key);
+const purge = key => engine.del(key);
 
-export const get = key => JSON.parse(engine.get(key));
+const get = key => JSON.parse(engine.get(key));
+
+export default { put, purge, get };
