@@ -10,6 +10,7 @@ import log from '@core/logger';
 import database from '@core/database';
 import cacheMiddleware from '@core/cache';
 import memoryCache from '@core/cache/memory';
+import urlParser from '@core/url';
 import posts from './resources/posts';
 
 const client = config.get('client');
@@ -23,6 +24,7 @@ app.use(compression());
 app.use(morgan('dev'));
 app.use(bodyParser.json({ limit: bodyParserLimit }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(urlParser());
 app.use(connectTimeout(timeout));
 app.use(responseTime());
 app.use(cacheMiddleware(memoryCache));

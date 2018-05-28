@@ -45,8 +45,10 @@ export default (model) => {
     const { max, limit } = config.get('pagination');
     const reqLimit = query.limit || limit;
     const page = query.page || 1;
+    const filters = Object.assign({}, query, { page, limit: reqLimit > max ? max : reqLimit });
+
     const promises = [
-      dataSource.find({ ...query, page, limit: reqLimit > max ? max : reqLimit }),
+      dataSource.find(filters),
       dataSource.count(query)
     ];
 
@@ -64,10 +66,10 @@ export default (model) => {
       .catch(next);
   });
 
-  router.post('/', createValidation(), ({ dataSource, body, originalUrl }, res, next) => {
+  router.post('/', createValidation(), ({ dataSource, body, fullUrl }, res, next) => {
     dataSource.insertOne(body)
       .then((result) => {
-        res.set('Location', `${originalUrl.split('?')[0]}/${result.insertedId}`);
+        res.set('Location', `${fullUrl.pathname}/${result.insertedId}`);
         res.status(201).end();
       })
       .catch(next);
