@@ -5,5 +5,9 @@
   },
   "db": {
     "host": "my-prod-host"
+  },
+  "cache": {
+    "stdTTL": 900000,
+    "checkperiod": 0
   }
 }
