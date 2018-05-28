@@ -18,5 +18,9 @@
   "cache": {
     "stdTTL": 900000,
     "checkperiod": 0
+  },
+  "pagination": {
+    "limit": 50,
+    "max": 200
   }
 }
