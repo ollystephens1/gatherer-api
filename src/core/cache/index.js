@@ -11,6 +11,11 @@ export default cache => (req, res, next) => {
     return next();
   }
 
+  const cacheControl = req.get('Cache-Control') || '';
+  if (cacheControl.toLowerCase() === 'no-cache') {
+    return next();
+  }
+
   const cacheContent = cache.get(key);
   if (cacheContent) {
     return res.json(cacheContent);
