@@ -1,3 +1,7 @@
+import config from 'config';
+
+const cacheConfig = config.get('cache.stdTTL');
+
 export default cache => (req, res, next) => {
   const key = `__express__${req.originalUrl}`;
 
@@ -21,9 +25,14 @@ export default cache => (req, res, next) => {
     return res.json(cacheContent);
   }
 
+  const regx = new RegExp('max-age');
+  const ttl = regx.test(cacheControl)
+    ? cacheControl.split('=')[1]
+    : cacheConfig;
+
   res.sendResponse = res.json;
   res.json = (body) => {
-    cache.put(key, body);
+    cache.put(key, body, ttl);
     res.sendResponse(body);
   };
   return next();
