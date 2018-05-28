@@ -1,6 +1,21 @@
 import express from 'express';
+import config from 'config';
 
 const router = express.Router();
+
+const createValidation = () => (req, res, next) => (req.createValidation
+  ? req.createValidation(req, res, next)
+  : next());
+
+const editValidation = () => (req, res, next) => (req.editValidation
+  ? req.editValidation(req, res, next)
+  : next());
+
+export const paginationHeaders = (res, count, page, limit) => {
+  res.set('X-Pagination-Count', Math.ceil(count / limit));
+  res.set('X-Pagination-Limit', limit);
+  res.set('X-Pagination-Page', page);
+};
 
 /**
  * Creates a new resource with a dataSource.
@@ -26,17 +41,18 @@ export default (model) => {
     next();
   });
 
-  const createValidation = () => (req, res, next) => (req.createValidation
-    ? req.createValidation(req, res, next)
-    : next());
-
-  const editValidation = () => (req, res, next) => (req.editValidation
-    ? req.editValidation(req, res, next)
-    : next());
-
   router.get('/', ({ dataSource, query }, res, next) => {
-    dataSource.find(query)
-      .then(docs => res.json(docs))
+    const { byPage, max } = config.get('pagination');
+    const paginationLimit = query.limit || byPage;
+    const limit = paginationLimit > max ? max : paginationLimit;
+    const page = query.page || 1;
+    const promises = [dataSource.find({ ...query, limit, page }), dataSource.count(query)];
+
+    Promise.all(promises)
+      .then(([docs, count]) => {
+        paginationHeaders(res, count, page, limit);
+        res.json(docs);
+      })
       .catch(next);
   });
 
@@ -49,7 +65,7 @@ export default (model) => {
   router.post('/', createValidation(), ({ dataSource, body, originalUrl }, res, next) => {
     dataSource.insertOne(body)
       .then((result) => {
-        res.set('Location', `${originalUrl}/${result.insertedId}`);
+        res.set('Location', `${originalUrl.split('?')[0]}/${result.insertedId}`);
         res.status(201).end();
       })
       .catch(next);

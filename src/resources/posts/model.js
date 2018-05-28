@@ -3,6 +3,9 @@ import fetch from 'node-fetch';
 const baseUrl = 'https://jsonplaceholder.typicode.com/posts';
 
 export default {
+  count() {
+    return Promise.resolve(100);
+  },
   find() {
     return fetch(baseUrl).then(res => res.json());
   },
