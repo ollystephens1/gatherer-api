@@ -8,12 +8,15 @@ import responseTime from 'response-time';
 import bodyParser from 'body-parser';
 import log from '@core/logger';
 import database from '@core/database';
+import cacheMiddleware from '@core/cache';
+import memoryCache from '@core/cache/memory';
 import posts from './resources/posts';
-import cacheMiddleware from '@core/cache'; // eslint-disable-line
 
 const client = config.get('client');
 const { port, timeout, bodyParserLimit } = config.get('server');
+
 const app = express();
+app.disable('x-powered-by');
 
 app.use(helmet());
 app.use(compression());
@@ -22,7 +25,7 @@ app.use(bodyParser.json({ limit: bodyParserLimit }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(connectTimeout(timeout));
 app.use(responseTime());
-app.use(cacheMiddleware());
+app.use(cacheMiddleware(memoryCache));
 app.use(database());
 
 app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));
