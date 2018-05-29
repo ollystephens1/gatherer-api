@@ -1,8 +1,6 @@
 import express from 'express';
 import config from 'config';
 
-const router = express.Router();
-
 const createValidation = () => (req, res, next) => (req.createValidation
   ? req.createValidation(req, res, next)
   : next());
@@ -26,6 +24,8 @@ export const paginationHeaders = (res, count, page, limit) => {
  * @returns Router
  */
 export default (model) => {
+  const router = express.Router();
+
   router.use((req, res, next) => {
     if (model.then !== undefined && model.catch !== undefined) {
       model
@@ -42,13 +42,13 @@ export default (model) => {
   });
 
   router.get('/', ({ dataSource, query }, res, next) => {
-    const { max, limit } = config.get('pagination');
-    const reqLimit = query.limit || limit;
-    const page = query.page || 1;
-    const filters = Object.assign({}, query, { page, limit: reqLimit > max ? max : reqLimit });
+    const pagination = config.get('pagination');
+    const { limit, page, ...filters } = query;
+    const reqLimit = limit || pagination.limit;
+    const max = reqLimit > pagination.max ? pagination.max : reqLimit;
 
     const promises = [
-      dataSource.find(filters),
+      dataSource.find(filters, max, page || 1),
       dataSource.count(query)
     ];
 
