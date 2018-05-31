@@ -48,7 +48,7 @@ export default (model) => {
     const max = reqLimit > pagination.max ? pagination.max : reqLimit;
 
     const promises = [
-      dataSource.find(filters, max, page || 1),
+      dataSource.find(filters, parseInt(max, 10), parseInt(page, 10) || 1),
       dataSource.count(query)
     ];
 

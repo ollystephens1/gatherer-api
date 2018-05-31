@@ -14,7 +14,7 @@ export default () => (req, res, next) => {
   fakeConnection()
     .then((connection) => {
       res.on('finish', () => connection.close());
-      req.db = connection;
+      res.locals.db = connection;
       next();
     })
     .catch(err => next(err));
