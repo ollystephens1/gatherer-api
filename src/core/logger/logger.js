@@ -32,7 +32,7 @@ const day = () => moment().format('YYYY-MM-DD');
  * --------
  * Logs all to console.
  * Logs errors & warnings to logfile (by date)
- * Log files per project & date in <project>/logs/<date>.log
+ * Logfile in log/<date>.log
  *
  * @type {Class}
  */

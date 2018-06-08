@@ -6,7 +6,7 @@ Install dependencies
 
 `yarn`
 
-Launch API in development mode (with Webpack & Nodemon live reloading)
+Launch API in development mode (live reload on changes)
 
 `npm run start`
 
@@ -28,7 +28,7 @@ To access environment config variables, do as follows:
 
 `import config from 'config';`
 
-`config.get('server.port');`
+`const { port, timeout } = config.get('server')`;
 
 [Read more](https://www.npmjs.com/package/config)
 
@@ -81,3 +81,18 @@ Log levels in order of importance:
 `log.silly('This is some random');`
 
 Errors and warnings are logged to a log file by date/time.
+
+### Error handling
+
+Errors thrown as above will be caught by common API error handling middleware
+
+`app.use(errorHandler);`
+
+Use common error handlers for specific cases:
+
+````
+import { badRequest } from '@core/error';
+if (!req.query.someId) {
+  throw badRequest('Please provide someId');
+}
+```

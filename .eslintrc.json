@@ -4,7 +4,10 @@
     "max-len": ["error", { "code": 120 }],
     "no-param-reassign": "off",
     "comma-dangle": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-confusing-arrow": "off",
+    "arrow-body-style": "off",
+    "no-irregular-whitespace": "off"
   },
   "settings": {
     "import/resolver": {

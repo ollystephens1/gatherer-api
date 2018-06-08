@@ -30,9 +30,11 @@ export default cache => (req, res, next) => {
     ? cacheControl.split('=')[1]
     : cacheConfig;
 
+  const timeout = ttl > 0 ? ttl : 1;
+
   res.sendResponse = res.json;
   res.json = (body) => {
-    cache.put(key, body, ttl);
+    cache.put(key, body, timeout);
     res.sendResponse(body);
   };
   return next();
