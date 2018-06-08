@@ -34,12 +34,14 @@ const buildError = (statusCode = 500, err) => {
   return error;
 };
 
-
 export const badRequest = err => buildError(400, err);
 
 export const unauthorized = err => buildError(401, err);
+
 export const forbidden = err => buildError(403, err);
+
 export const notFound = err => buildError(404, err);
+
 export const internal = err => buildError(500, err);
 
 export const unavailable = err => buildError(503, err);
