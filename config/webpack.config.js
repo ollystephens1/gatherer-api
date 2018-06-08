@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const ENV = process.env.NODE_ENV;
 const ROOT = process.cwd();
@@ -11,10 +12,9 @@ const isProd = (ENV === 'production');
 
 const plugins = [
   new webpack.WatchIgnorePlugin([path.resolve(ROOT, 'dist')]),
-  new NodemonPlugin()
 ];
 
-if (ENV === 'production') {
+if (isProd) {
   plugins.push(new UglifyJsPlugin({
     sourceMap: false,
     uglifyOptions: {
@@ -28,6 +28,11 @@ if (ENV === 'production') {
       }
     }
   }));
+} else {
+  plugins.push(
+    new DashboardPlugin(),
+    new NodemonPlugin()
+  )
 }
 
 module.exports = {

@@ -4,7 +4,7 @@
   "description": "ClearPeaks Node.js API seed",
   "private": true,
   "scripts": {
-    "build:dev": "cross-env NODE_ENV=development npm run build:webpack",
+    "build:dev": "cross-env NODE_ENV=development webpack-dashboard npm run build:webpack",
     "build:prod": "cross-env NODE_ENV=production npm run build:webpack",
     "build:webpack": "webpack --config ./config/webpack.config.js",
     "eslint": "./node_modules/.bin/eslint ./src",
@@ -56,6 +56,7 @@
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^3.11.0",
     "webpack-cli": "^2.0.11",
+    "webpack-dashboard": "^2.0.0",
     "webpack-node-externals": "^1.6.0"
   }
 }

@@ -15,10 +15,9 @@ import posts from './resources/posts';
 
 const client = config.get('client');
 const { port, timeout, bodyParserLimit } = config.get('server');
-
 const app = express();
-app.disable('x-powered-by');
 
+app.disable('x-powered-by');
 app.use(helmet());
 app.use(compression());
 app.use(morgan('dev'));
