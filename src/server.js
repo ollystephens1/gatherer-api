@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 import log from '@core/logger';
 import database from '@core/database';
 import cacheMiddleware from '@core/cache';
+import { notFound, ErrorHandler } from '@core/error';
 import memoryCache from '@core/cache/memory';
 import urlParser from '@core/url';
 import posts from './resources/posts';
@@ -32,21 +33,13 @@ app.use(database());
 app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));
 app.use('/posts', posts);
 
-// 404 hanlder
+// Handle unknown endpoints
 app.use((req, res, next) => {
-  const err = new Error('404 Not Found');
-  err.code = 404;
-  next(err);
+  next(notFound('Unknown endpoint'));
 });
 
-// Error hanlder
-app.use((err, req, res) => {
-  err.code = err.status || err.code || 500;
-  res.status(err.code).json({
-    code: err.code,
-    msg: err.message
-  });
-});
+// Handle All other API errors
+app.use(ErrorHandler);
 
 app.listen(port, () => log.info(`${client.name} running on port ${port}`));
 
