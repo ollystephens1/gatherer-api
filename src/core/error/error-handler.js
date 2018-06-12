@@ -17,8 +17,7 @@ export default (err, req, res, next) => { // eslint-disable-line no-unused-vars
   err = cleanError(err);
 
   const response = {
-    status: false,
-    code: err.code,
+    code: err.code || err.status || 500,
     message: err.message
   };
 
