@@ -90,7 +90,7 @@ Errors thrown as above will be caught by common API error handling middleware
 
 Use common error handlers for specific cases:
 
-````
+```
 import { badRequest } from '@core/error';
 if (!req.query.someId) {
   throw badRequest('Please provide someId');
