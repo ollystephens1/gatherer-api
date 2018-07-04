@@ -7,6 +7,7 @@ import connectTimeout from 'connect-timeout';
 import responseTime from 'response-time';
 import bodyParser from 'body-parser';
 import log from '@core/logger';
+import './schemas';
 import database from '@core/database';
 import { notFound, ErrorHandler } from '@core/error';
 import routes from './routes';
@@ -26,7 +27,6 @@ app.use(responseTime());
 database();
 
 app.use('/', routes);
-// app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));
 
 // Handle unknown endpoints
 app.use((req, res, next) => {

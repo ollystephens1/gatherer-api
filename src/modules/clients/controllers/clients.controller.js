@@ -1,3 +1,5 @@
+import clientService from '../services/client.service';
+
 export default {
 	find,
 	findOne,
@@ -6,22 +8,67 @@ export default {
 	remove
 };
 
+/**
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
 function find(req, res, next) {
-	res.json({ message: 'Works!' });
+	clientService
+		.find(req.query)
+		.then(clients => res.json(clients))
+		.catch(next);
 }
 
+/**
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
 function findOne(req, res, next) {
-	res.json({ message: 'Works!' });
+	clientService
+		.findOne(req.params.id)
+		.then(client => res.json(client))
+		.catch(next);
 }
 
+/**
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
 function add(req, res, next) {
-	res.json({ message: 'Works!' });
+	clientService
+		.add(req.body)
+		.then(client => res.json(client))
+		.catch(next);
 }
 
+/**
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
 function update(req, res, next) {
-	res.json({ message: 'Works!' });
+	clientService
+		.update(req.body)
+		.then(client => res.json(client))
+		.catch(next);
 }
 
+/**
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
 function remove(req, res, next) {
-	res.json({ message: 'Works!' });
+	clientService
+		.remove(req.params.id)
+		.then(result => res.json(result))
+		.catch(next);
 }
