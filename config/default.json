@@ -1,26 +1,26 @@
 {
-  "client": {
-    "name": "Clearpeaks Seed API"
-  },
-  "server": {
-    "port": 3000,
-    "host": "localhost",
-    "bodyParserLimit": "50mb",
-    "timeout": "10s"
-  },
-  "db": {
-    "host": "localhost",
-    "port": 27017,
-    "dbName": "my-db-name",
-    "user": "my-db-user",
-    "pass": "my-db-pass"
-  },
-  "cache": {
-    "stdTTL": 900000,
-    "checkperiod": 0
-  },
-  "pagination": {
-    "limit": 50,
-    "max": 200
-  }
+	"app": {
+		"name": "Gatherer API"
+	},
+	"server": {
+		"port": 3000,
+		"host": "localhost",
+		"bodyParserLimit": "50mb",
+		"timeout": "10s"
+	},
+	"db": {
+		"host": "localhost",
+		"port": 27017,
+		"dbName": "gatherer",
+		"user": "my-db-user",
+		"pass": "my-db-pass"
+	},
+	"cache": {
+		"stdTTL": 900000,
+		"checkperiod": 0
+	},
+	"pagination": {
+		"limit": 50,
+		"max": 200
+	}
 }

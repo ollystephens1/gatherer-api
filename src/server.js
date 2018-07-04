@@ -8,13 +8,10 @@ import responseTime from 'response-time';
 import bodyParser from 'body-parser';
 import log from '@core/logger';
 import database from '@core/database';
-import cacheMiddleware from '@core/cache';
-import { notFound, ErrorHandler } from '@core/error';
-import memoryCache from '@core/cache/memory';
-import urlParser from '@core/url';
-import posts from './resources/posts';
+import { notFound, ErrorHandler } from '@core/error';
+import routes from './routes';
 
-const client = config.get('client');
+const client = config.get('app');
 const { port, timeout, bodyParserLimit } = config.get('server');
 const app = express();
 
@@ -24,18 +21,16 @@ app.use(compression());
 app.use(morgan('dev'));
 app.use(bodyParser.json({ limit: bodyParserLimit }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(urlParser());
 app.use(connectTimeout(timeout));
 app.use(responseTime());
-app.use(cacheMiddleware(memoryCache));
-app.use(database());
+database();
 
-app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));
-app.use('/posts', posts);
+app.use('/', routes);
+// app.get('/', (req, res) => res.json({ status: 'OK', code: 200 }));
 
 // Handle unknown endpoints
 app.use((req, res, next) => {
-  next(notFound('Unknown endpoint'));
+	next(notFound('Unknown endpoint'));
 });
 
 // Handle All other API errors
