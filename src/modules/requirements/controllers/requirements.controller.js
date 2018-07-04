@@ -1,4 +1,4 @@
-import usersService from '../services/users.service';
+import requirementsService from '../services/requirements.service';
 
 export default {
 	find,
@@ -15,9 +15,9 @@ export default {
  * @param {Function} next
  */
 function find(req, res, next) {
-	usersService
+	requirementsService
 		.find(req.query)
-		.then(users => res.json(users))
+		.then(requirements => res.json(requirements))
 		.catch(next);
 }
 
@@ -28,9 +28,9 @@ function find(req, res, next) {
  * @param {Function} next
  */
 function findOne(req, res, next) {
-	usersService
+	requirementsService
 		.findOne(req.params.id)
-		.then(user => res.json(user))
+		.then(requirement => res.json(requirement))
 		.catch(next);
 }
 
@@ -41,9 +41,9 @@ function findOne(req, res, next) {
  * @param {Function} next
  */
 function add(req, res, next) {
-	usersService
+	requirementsService
 		.add(req.body)
-		.then(user => res.json(user))
+		.then(requirement => res.json(requirement))
 		.catch(next);
 }
 
@@ -54,9 +54,9 @@ function add(req, res, next) {
  * @param {Function} next
  */
 function update(req, res, next) {
-	usersService
+	requirementsService
 		.update(req.body)
-		.then(user => res.json(user))
+		.then(requirement => res.json(requirement))
 		.catch(next);
 }
 
@@ -67,7 +67,7 @@ function update(req, res, next) {
  * @param {Function} next
  */
 function remove(req, res, next) {
-	usersService
+	requirementsService
 		.remove(req.params.id)
 		.then(result => res.json(result))
 		.catch(next);

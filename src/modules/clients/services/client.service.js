@@ -18,8 +18,8 @@ function findOne(id) {
 }
 
 function add(post = {}) {
-	const newClient = Client(post);
-	return Client.save();
+	const newClient = new Client(post);
+	return newClient.save();
 }
 
 function update(post = {}) {

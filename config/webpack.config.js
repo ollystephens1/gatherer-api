@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const ENV = process.env.NODE_ENV;
 const ROOT = process.cwd();
@@ -29,10 +28,7 @@ if (isProd) {
 		})
 	);
 } else {
-	plugins.push(
-		// new DashboardPlugin(),
-		new NodemonPlugin()
-	);
+	plugins.push(new NodemonPlugin());
 }
 
 module.exports = {
