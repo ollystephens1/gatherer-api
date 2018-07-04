@@ -1,8 +1,8 @@
 {
-	"name": "seed-api",
+	"name": "gatherer-api",
 	"version": "1.0.0",
-	"description": "ClearPeaks Node.js API seed",
-	"private": true,
+	"description": "Gatherer API",
+  "private": true,
 	"scripts": {
 		"build:dev": "cross-env NODE_ENV=development npm run build:webpack",
 		"build:prod": "cross-env NODE_ENV=production npm run build:webpack",

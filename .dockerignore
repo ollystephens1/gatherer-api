@@ -1,0 +1,11 @@
+/node_modules
+/log
+/test
+/dist
+
+npm-debug.log
+yarn-debug.log
+README.md
+.vscode
+.DS_Store
+Thumbs.db
