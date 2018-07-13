@@ -1,4 +1,5 @@
 import requirementsService from '../services/requirements.service';
+import response from '@core/response/response';
 
 export default {
 	find,
@@ -17,7 +18,7 @@ export default {
 function find(req, res, next) {
 	requirementsService
 		.find(req.query)
-		.then(requirements => res.json(requirements))
+		.then(requirements => response(res, requirements))
 		.catch(next);
 }
 
@@ -30,7 +31,7 @@ function find(req, res, next) {
 function findOne(req, res, next) {
 	requirementsService
 		.findOne(req.params.id)
-		.then(requirement => res.json(requirement))
+		.then(requirement => response(res, requirement))
 		.catch(next);
 }
 
@@ -43,7 +44,7 @@ function findOne(req, res, next) {
 function add(req, res, next) {
 	requirementsService
 		.add(req.body)
-		.then(requirement => res.json(requirement))
+		.then(requirement => response(res, requirement, 'Required created successfully'))
 		.catch(next);
 }
 
@@ -56,7 +57,7 @@ function add(req, res, next) {
 function update(req, res, next) {
 	requirementsService
 		.update(req.body)
-		.then(requirement => res.json(requirement))
+		.then(requirement => response(res, requirement, 'Requirement updated successfully'))
 		.catch(next);
 }
 
@@ -69,6 +70,6 @@ function update(req, res, next) {
 function remove(req, res, next) {
 	requirementsService
 		.remove(req.params.id)
-		.then(result => res.json(result))
+		.then(result => response(res, result, 'Requirement deleted successfully'))
 		.catch(next);
 }

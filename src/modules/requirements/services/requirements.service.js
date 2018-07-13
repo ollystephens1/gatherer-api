@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const Requirement = mongoose.model('Requirement');
+const Project = mongoose.model('Project');
 
 export default {
 	find,
@@ -19,7 +20,19 @@ function findOne(id) {
 
 function add(post = {}) {
 	const requirement = new Requirement(post);
-	return requirement.save();
+	return requirement.save().then(newRequirement => {
+    const projectId = newRequirement.project;
+
+    return Project
+      .findById(projectId)
+      .then(project => {
+        project.requirements.push(newRequirement._id);
+        return project.save().then(() => {
+          console.log(newRequirement);
+          return newRequirement;
+        });
+      });
+  });
 }
 
 function update(post = {}) {

@@ -1,4 +1,5 @@
 import clientService from '../services/client.service';
+import response from '@core/response/response';
 
 export default {
 	find,
@@ -17,7 +18,7 @@ export default {
 function find(req, res, next) {
 	clientService
 		.find(req.query)
-		.then(clients => res.json(clients))
+		.then(clients => response(res, clients))
 		.catch(next);
 }
 
@@ -30,7 +31,7 @@ function find(req, res, next) {
 function findOne(req, res, next) {
 	clientService
 		.findOne(req.params.id)
-		.then(client => res.json(client))
+		.then(client => response(res, client))
 		.catch(next);
 }
 
@@ -43,7 +44,7 @@ function findOne(req, res, next) {
 function add(req, res, next) {
 	clientService
 		.add(req.body)
-		.then(client => res.json(client))
+		.then(client => response(res, client, 'Client added successfully'))
 		.catch(next);
 }
 
@@ -56,7 +57,7 @@ function add(req, res, next) {
 function update(req, res, next) {
 	clientService
 		.update(req.body)
-		.then(client => res.json(client))
+		.then(client => response(res, client, 'Client updated successfully'))
 		.catch(next);
 }
 
@@ -69,6 +70,6 @@ function update(req, res, next) {
 function remove(req, res, next) {
 	clientService
 		.remove(req.params.id)
-		.then(result => res.json(result))
+		.then(result => response(res, req.params.id, 'Client deleted successfully'))
 		.catch(next);
 }

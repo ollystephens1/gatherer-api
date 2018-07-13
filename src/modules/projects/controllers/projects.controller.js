@@ -1,4 +1,5 @@
 import projectService from '../services/projects.service';
+import response from '@core/response/response';
 
 export default {
 	find,
@@ -17,7 +18,7 @@ export default {
 function find(req, res, next) {
 	projectService
 		.find(req.query)
-		.then(projects => res.json(projects))
+		.then(projects => response(res, projects))
 		.catch(next);
 }
 
@@ -30,9 +31,10 @@ function find(req, res, next) {
 function findOne(req, res, next) {
 	projectService
 		.findOne(req.params.id)
-		.then(project => res.json(project))
+		.then(project => response(res, project))
 		.catch(next);
 }
+
 
 /**
  *
@@ -43,7 +45,7 @@ function findOne(req, res, next) {
 function add(req, res, next) {
 	projectService
 		.add(req.body)
-		.then(project => res.json(project))
+		.then(project => response(res, project, 'Project created successfully'))
 		.catch(next);
 }
 
@@ -56,7 +58,7 @@ function add(req, res, next) {
 function update(req, res, next) {
 	projectService
 		.update(req.body)
-		.then(project => res.json(project))
+		.then(project => response(res, project, 'Project updated successfully'))
 		.catch(next);
 }
 
@@ -69,6 +71,6 @@ function update(req, res, next) {
 function remove(req, res, next) {
 	projectService
 		.remove(req.params.id)
-		.then(result => res.json(result))
+		.then(result => response(res, result, 'Project deleted successfully'))
 		.catch(next);
 }

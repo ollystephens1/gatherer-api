@@ -10,11 +10,11 @@ export default {
 };
 
 function find(query = {}) {
-	return Project.find(query);
+	return Project.find(query).populate('client requirements');
 }
 
 function findOne(id) {
-	return Project.findById(id);
+	return Project.findById(id).populate('client requirements');
 }
 
 function add(post = {}) {
@@ -23,8 +23,8 @@ function add(post = {}) {
 }
 
 function update(post = {}) {
-	const project = new Project(post);
-	return Project.findOneAndUpdate({ _id: project._id }, project, { new: true });
+  const project = new Project(post);
+	return Project.findOneAndUpdate({ _id: project._id }, project, { new: true }).populate('client requirements');
 }
 
 function remove(id) {
