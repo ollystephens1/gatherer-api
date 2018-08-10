@@ -31,7 +31,7 @@ router.post('/login', passport.authenticate('jwt-login', { session: false }), (r
 
     // Generates a signed web token with the contents of user object
     const token = jwt.sign({ user: user.name }, 'your_jwt_secret');
-    response(res, { token });
+    response(res, { token, user });
   });
 });
 

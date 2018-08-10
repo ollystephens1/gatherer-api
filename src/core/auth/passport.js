@@ -67,7 +67,7 @@ export default (passport) => {
       }
 
       console.log('ACTIVITY: Logged in');
-      // user.setLastSeen();
+      user.password = '';
 
       // all is well, return successful user
       return done(null, user);
