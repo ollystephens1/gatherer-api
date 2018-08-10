@@ -6,11 +6,13 @@ import morgan from 'morgan';
 import connectTimeout from 'connect-timeout';
 import responseTime from 'response-time';
 import bodyParser from 'body-parser';
+import passport from 'passport';
 import log from '@core/logger';
 import './schemas';
 import database from '@core/database';
 import { notFound, ErrorHandler } from '@core/error';
 import routes from './routes';
+import '@auth/passport';
 
 const client = config.get('app');
 const { port, timeout, bodyParserLimit } = config.get('server');
@@ -24,6 +26,7 @@ app.use(bodyParser.json({ limit: bodyParserLimit }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(connectTimeout(timeout));
 app.use(responseTime());
+app.use(passport.initialize());
 
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -32,7 +35,7 @@ app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE, HEAD');
 	next();
 });
-  
+
 database();
 
 app.use('/', routes);

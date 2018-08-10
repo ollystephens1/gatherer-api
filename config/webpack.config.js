@@ -62,7 +62,8 @@ module.exports = {
 		extensions: ['.js'],
 		modules: [path.resolve(__dirname, 'node_modules')],
 		alias: {
-			'@core': `${ROOT}/src/core`
+			'@core': `${ROOT}/src/core`,
+			'@auth': `${ROOT}/src/core/auth`
 		}
 	},
 	stats: {

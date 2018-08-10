@@ -10,15 +10,20 @@ export default {
 };
 
 function find(query = {}) {
-	return User.find(query);
+	return User.find(query, { password: 0 });
 }
 
 function findOne(id) {
-	return User.findById(id);
+	return User.findById(id, { password: 0 });
 }
 
 function add(post = {}) {
-	const user = new User(post);
+  const user = new User(post);
+
+  if (user.password) {
+    user.setPassword(user.password);
+  }
+
 	return user.save();
 }
 

@@ -6,7 +6,8 @@
 		"port": 3000,
 		"host": "localhost",
 		"bodyParserLimit": "50mb",
-		"timeout": "10s"
+    "timeout": "10s",
+    "passwordHash": "0638557b443ff7e7895db965897aa927"
 	},
 	"db": {
 		"host": "localhost",
